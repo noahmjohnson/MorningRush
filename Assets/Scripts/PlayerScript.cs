@@ -12,6 +12,10 @@ public class PlayerScript : MonoBehaviour {
 	//machines
 	public GameObject EspressoMachineObject;
 	public GameObject MilkStockObject;
+	public GameObject SugarBagObject;
+	
+	//variable for checking if the player is currently busy doing something
+	public bool busy = false;
 
 	//variable for tracking how many complaints have been made to the manager
 	int Complaints = 0;
@@ -48,8 +52,8 @@ public class PlayerScript : MonoBehaviour {
 	//handles what keys are pressed and what actions to perform
 	void KeyInputs()
 	{
-		//if you press mouse1, it will shoot projecitle
-		if (Input.GetKeyDown (KeyCode.Mouse0))
+		//if you press mouse1 and youre not busy, it will shoot projecitle
+		if (Input.GetKeyDown (KeyCode.Mouse0) && !busy)
 		{
 			//run shoot projecitle
 			shootProjectile ();
@@ -69,7 +73,7 @@ public class PlayerScript : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.E))
 		{
 			//add sugar
-			PSugar++;
+			SugarBagObject.SendMessage("TryQueueSugar");
 		}
 		if (Input.GetKeyDown (KeyCode.R))
 		{
@@ -85,6 +89,20 @@ public class PlayerScript : MonoBehaviour {
 		{
 			//stock milk
 			MilkStockObject.GetComponent<MilkStock>().StartCoroutine("StockMilk");
+		}
+		if (Input.GetKeyDown(KeyCode.D))
+		{
+			//make the player busy if they pour sugar
+			busy = true;
+			//turn on the sugar pouring
+			SugarBagObject.GetComponent<SugarBag>().PouringSugar = true;
+		}
+		if (Input.GetKeyUp(KeyCode.D))
+		{
+			//make the player not busy when they stop pouring sugar
+			busy = false;
+			//turn off the sugar pouring
+			SugarBagObject.GetComponent<SugarBag>().PouringSugar = false;
 		}
 	}
 

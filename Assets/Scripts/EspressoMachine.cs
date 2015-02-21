@@ -30,15 +30,19 @@ public class EspressoMachine : MonoBehaviour {
 	//ienumerator for stocking fresh milk
 	IEnumerator MaintainEspresso()
 	{
+		//make the player busy
+		myPlayerScript.busy = true;
 		//after a few seconds
 		yield return new WaitForSeconds(2f);
 		//add half of maintenance to the espresso
 		CurrentMaintenance += 10;
-		//check that if its more than 20, set it to 20
-		if(CurrentMaintenance > 20)
+		//check that if its more than the max, set it to the max
+		if(CurrentMaintenance > MaxMaintenance)
 		{
-			CurrentMaintenance = 20;
+			CurrentMaintenance = MaxMaintenance;
 		}
+		//make the player not busy
+		myPlayerScript.busy = false;
 	}
 	
 	//function to try to queue espresso into the current drink

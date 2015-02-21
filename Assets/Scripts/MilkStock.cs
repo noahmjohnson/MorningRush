@@ -44,10 +44,14 @@ public class MilkStock : MonoBehaviour {
 	//ienumerator for stocking fresh milk
 	IEnumerator StockMilk()
 	{
+		//make sure the player is busy so they can't shoot
+		myPlayerScript.busy = true;
 		//after a few seconds
 		yield return new WaitForSeconds(2f);
 		//stock a full fridge of fresh milk
 		CurrentFreshMilk = 10;
+		//make sure the player is no longer busy
+		myPlayerScript.busy = false;
 	}
 	
 	//function to run the queueing of milk into the current drink
