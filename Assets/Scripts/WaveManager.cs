@@ -4,12 +4,12 @@ using System.Collections;
 public class WaveManager : MonoBehaviour {
 
 	//variable for how many complaints the player can take
-	public int PlayerHealth = 3;
+	public static int PlayerHealth = 3;
 
 	int currentWave = 1; //variable for tracking what wave it is NOW
 	int enemiesToSpawn; //enemies total of the wave
 	int enemiesNeedSpawn; //enemies still needing to spawn
-	public int enemiesKilled; //enemies of wave killed
+	public static int enemiesKilled; //enemies of wave killed
 	bool waveComplete = false; //is the wave complete
 	bool canStart = true; //can the next wave start
 	bool readyToSpawn = true; //is it ready to spawn

@@ -3,6 +3,10 @@ using System.Collections;
 
 public class PlayerScript : MonoBehaviour {
 
+	//event handler for exodus
+	public delegate void MassExodus(bool satisfied);
+	public static event MassExodus myMassExodus;
+
 	//variables for what the player has queued up
 	public int PEspresso = 0;
 	public int PMilk = 0;
@@ -16,14 +20,13 @@ public class PlayerScript : MonoBehaviour {
 	
 	//variable for checking if the player is currently busy doing something
 	public bool busy = false;
-
-	//variable for tracking how many complaints have been made to the manager
-	int Complaints = 0;
 	
 	//variable for affecting movement, making player slower/faster
 	public float speed = 5;
 	//variable for the projectile to be shot
 	public GameObject Projectile;
+
+	//event handler
 
 	// Update is called once per frame
 	void Update () {
@@ -33,20 +36,6 @@ public class PlayerScript : MonoBehaviour {
 
 		//make the player face the mouse
 		FaceMouse ();
-
-		CheckComplaints ();
-	}
-
-	//function for checking if the amount of complaints causes the character to lose
-	void CheckComplaints()
-	{
-		//if three complaints are made
-		if (Complaints >= 3) 
-		{
-			//tell player they've failed
-			print ("Youve failed");
-
-		}
 	}
 
 	//handles what keys are pressed and what actions to perform
@@ -155,6 +144,20 @@ public class PlayerScript : MonoBehaviour {
 	//function for when an enemy complains to the manager
 	public void FaceConsequences()
 	{
-
+		//if you arent about to die
+		if(WaveManager.PlayerHealth > 1)
+		{
+			//subtract from the repuatation
+			WaveManager.PlayerHealth--;
+		}
+		else 
+		{
+			//subtract from the repuatation
+			WaveManager.PlayerHealth--;
+			
+			//otherwise end the game
+			//mass exodus time, with them being unhappy
+			myMassExodus(false);
+		}
 	}
 }

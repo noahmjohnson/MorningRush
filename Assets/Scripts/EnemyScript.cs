@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 //use the unity UI
 using UnityEngine.UI;
 using System.Collections;
@@ -15,9 +15,6 @@ public class EnemyScript : MonoBehaviour {
 	//variable for actual part of the enemy that we will rotate, as opposed to the text
 	public GameObject EnemyText;
 
-	//variable for referencing the wave manager
-	public GameObject WaveMan;
-
 	//variable for if enemy is satisfied
 	bool satisfied = false;
 
@@ -26,8 +23,9 @@ public class EnemyScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//set the reference of the game manager
-		WaveMan = GameObject.FindGameObjectWithTag ("WaveMan");
+	
+		//subscribe to the event
+		PlayerScript.myMassExodus += LeaveTheStore;
 		//face the player
 		transform.rotation = Quaternion.LookRotation(Vector3.forward, player.transform.position - transform.position);
 		//set the rotation of the text so it's not getting all janky with the box
@@ -38,6 +36,12 @@ public class EnemyScript : MonoBehaviour {
 
 		//call teh function to set duh text of duh enemay
 		SetText ();
+	}
+	
+	void OnDisable()
+	{
+		//unsubscribe to the event
+		PlayerScript.myMassExodus -= LeaveTheStore;
 	}
 
 	//function to set the text above the enemy so player knows what the enemy wantz
@@ -136,6 +140,7 @@ public class EnemyScript : MonoBehaviour {
 		{
 			//have them complain to the manager
 			c.GetComponent<PlayerScript>().FaceConsequences();
+			
 			//have the enemy leave the store, with happy as false
 			LeaveTheStore(false);
 		}
@@ -143,8 +148,8 @@ public class EnemyScript : MonoBehaviour {
 
 	IEnumerator BoomDestroy()
 	{
+		WaveManager.enemiesKilled++;
 		yield return new WaitForSeconds(10f);
-		WaveMan.GetComponent<WaveManager>().enemiesKilled++;
 		Destroy (this.gameObject);
 	}
 
