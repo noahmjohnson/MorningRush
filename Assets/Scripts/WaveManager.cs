@@ -9,6 +9,9 @@ public class WaveManager : MonoBehaviour {
 
 	//variable for how many complaints the player can take
 	public static int PlayerHealth = 3;
+	
+	//variable for if the player should have infinite resources
+	public static bool InfiniteResources = false;
 
 	int currentWave = 1; //variable for tracking what wave it is NOW
 	int enemiesToSpawn; //enemies total of the wave

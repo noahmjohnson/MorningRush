@@ -51,11 +51,16 @@ public class EspressoMachine : MonoBehaviour {
 	//function to try to queue espresso into the current drink
 	void TryQueueEspresso()
 	{
+	
 		//if its not broken
 		if(CurrentMaintenance > 0)
 		{
-			//lessen the maintenance by one
-			CurrentMaintenance -= 1;
+			//if you dont have infinite
+			if(!WaveManager.InfiniteResources)
+			{
+				//lessen the maintenance by one
+				CurrentMaintenance -= 1;
+			}
 			//add one to the queue
 			myPlayerScript.PEspresso++;
 		}

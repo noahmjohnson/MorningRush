@@ -4,7 +4,7 @@ using System.Collections;
 public class MilkStock : MonoBehaviour {
 
 	//variabel for the max amount of milk a player has in stock
-	public int MaxFreshMilk = 10;
+	public int MaxFreshMilk = 15;
 	//variable for the current amount of milk a player can use
 	public int CurrentFreshMilk;
 	
@@ -58,7 +58,7 @@ public class MilkStock : MonoBehaviour {
 		//after a few seconds
 		yield return new WaitForSeconds(2f);
 		//stock a full fridge of fresh milk
-		CurrentFreshMilk = 10;
+		CurrentFreshMilk = MaxFreshMilk;
 		//make sure the player is no longer busy
 		myPlayerScript.busy = false;
 	}
@@ -69,6 +69,12 @@ public class MilkStock : MonoBehaviour {
 		//if you have more than no milk
 		if(CurrentFreshMilk > 0)
 		{
+			//if you dont have infinite
+			if(!WaveManager.InfiniteResources)
+			{
+				//lessen the milk by one
+				CurrentFreshMilk -= 1;
+			}
 			//add one to the queue
 			myPlayerScript.PMilk++;
 		}

@@ -17,6 +17,9 @@ public class EncounterEnemy : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	
+		//turn on infinite resources
+		WaveManager.InfiniteResources = true;
+	
 		//find the player
 		player = GameObject.FindGameObjectWithTag("Player");
 		
@@ -122,6 +125,9 @@ public class EncounterEnemy : MonoBehaviour {
 	{	
 		
 		yield return new WaitForSeconds(10f);
+		
+		//turn off infinite resources
+		WaveManager.InfiniteResources = false;
 		
 		//break the machines
 		WaveManager.BreakMachines();

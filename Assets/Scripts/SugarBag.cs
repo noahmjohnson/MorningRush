@@ -55,10 +55,15 @@ public class SugarBag : MonoBehaviour {
 		//if you have more than the required amount of sugar
 		if(CurrentSugar > 100)
 		{
+		
+			//if you dont have infinite
+			if(!WaveManager.InfiniteResources)
+			{
+				//remove 100 sugar
+				CurrentSugar -= 100;
+			}
 			//add one to the queue
 			myPlayerScript.PSugar++;
-			//remove 100 sugar
-			CurrentSugar -= 100;
 		}
 		//otherwise
 		else
