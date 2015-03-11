@@ -3,6 +3,10 @@ using System.Collections;
 
 public class WaveManager : MonoBehaviour {
 
+	//event handler for breaking all machines
+	public delegate void BreakAllMachines();
+	public static event BreakAllMachines myBreakAll;
+
 	//variable for how many complaints the player can take
 	public static int PlayerHealth = 3;
 
@@ -11,9 +15,12 @@ public class WaveManager : MonoBehaviour {
 	int enemiesNeedSpawn; //enemies still needing to spawn
 	public static int enemiesKilled; //enemies of wave killed
 	bool waveComplete = false; //is the wave complete
-	bool canStart = true; //can the next wave start
+	public static bool canStart; //can the next wave start
 	bool readyToSpawn = true; //is it ready to spawn
 	bool endWaveRunning = false; //end the wave running currently
+	
+	//bool for if the game is running
+	public static bool running;
 	
 	public GameObject enemy; //variable for enemy
 
@@ -23,8 +30,11 @@ public class WaveManager : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-
-		StartWave (); //start wave
+	
+	
+		running = false;
+		canStart = false;
+		//StartWave (); //start wave
 	}
 	
 	// Update is called once per frame
@@ -37,11 +47,11 @@ public class WaveManager : MonoBehaviour {
 			{
 				StartWave (); //if it can start, start it
 			}
-			if (!waveComplete) 
+			if (!waveComplete && running) 
 			{  //if its not complete,
 				Spawn (); //continue spawning
 			}
-			if (CheckComplete ()) 
+			if (CheckComplete () && running) 
 			{ //checkif its complete,
 				if (!endWaveRunning) 
 				{ //if it is, and we arent ending the wave running,
@@ -57,6 +67,13 @@ public class WaveManager : MonoBehaviour {
 		}
 		
 	}
+	
+	public static void BreakMachines()
+	{
+		myBreakAll();
+	}
+	
+	
 	
 	void StartWave() //start wave set
 	{

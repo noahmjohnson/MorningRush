@@ -119,8 +119,13 @@ public class EncounterEnemy : MonoBehaviour {
 	
 	//boom boom boom boom boom
 	IEnumerator BoomDestroy()
-	{
+	{	
+		
 		yield return new WaitForSeconds(10f);
+		
+		//break the machines
+		WaveManager.BreakMachines();
+		
 		Destroy (this.gameObject);
 	}
 }

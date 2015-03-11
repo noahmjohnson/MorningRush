@@ -17,9 +17,18 @@ public class MilkStock : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		//subscribe to the breakall
+		WaveManager.myBreakAll += BreakMachine;
+		
 		myPlayerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>(); //set the player script
 		SetCurrentMilkStock(); //call the function to set the current milk
 		StartCoroutine("SpoilMilk");
+	}
+	
+	//function to break the machine
+	void BreakMachine()
+	{
+		CurrentFreshMilk = 0;
 	}
 	
 	//function to set the amount of current milk based off the max milk

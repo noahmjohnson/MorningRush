@@ -14,6 +14,9 @@ public class SugarBag : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		//subscribe to the breakall
+		WaveManager.myBreakAll += BreakMachine;
+	
 		myPlayerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>(); //set the player script
 		SetCurrentSugar(); //call the function to set the current maintenance
 	}
@@ -23,6 +26,12 @@ public class SugarBag : MonoBehaviour {
 	{
 		//set the current sugar to the max, topping it off
 		CurrentSugar = MaxSugar;
+	}
+		
+	//function to break the machine	
+	void BreakMachine()
+	{
+		CurrentSugar = 0;
 	}
 	
 	//update to check if youre pouring sugar

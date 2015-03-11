@@ -12,6 +12,9 @@ public class EspressoMachine : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		//subscribe to the breakall
+		WaveManager.myBreakAll += BreakMachine;
+		
 		myPlayerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>(); //set the player script
 		SetCurrentMaintenance(); //call the function to set the current maintenance
 	}
@@ -22,9 +25,9 @@ public class EspressoMachine : MonoBehaviour {
 		CurrentMaintenance = MaxMaintenance;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	void BreakMachine()
+	{
+		CurrentMaintenance = 0;
 	}
 	
 	//ienumerator for stocking fresh milk
