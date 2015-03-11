@@ -2,26 +2,25 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class EncounterEnemy : MonoBehaviour {
+public class EncounterEnemy2 : MonoBehaviour {
 
+	
 	//variable for the player that the enemy will #stalk
 	public GameObject player;
-	//variable for the second encounter enemy
-	public EncounterEnemy2 EncounterEnemySecond;
 	
 	//bools to pause the player
-	public bool paused;
-	public bool done;
+	public bool paused = false;
+	public bool done = false;
 	
 	//variable for actual part of the enemy that we will rotate, as opposed to the text
 	public GameObject EnemyText;
-
+	
 	// Use this for initialization
 	void Start () {
-	
-		//turn on infinite resources
-		WaveManager.InfiniteResources = true;
-	
+		
+		//pause them on start
+		paused = true;
+		
 		//find the player
 		player = GameObject.FindGameObjectWithTag("Player");
 		
@@ -32,12 +31,12 @@ public class EncounterEnemy : MonoBehaviour {
 		
 		//call teh function to set duh text of duh enemay
 		InitialText ();
-	
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+		
 		//if they arent paused
 		if(!paused)
 		{
@@ -46,27 +45,39 @@ public class EncounterEnemy : MonoBehaviour {
 		}
 		
 		//if they hit y position 2,
-		if(transform.position.y < 2 && !done)
+		if(transform.position.y < 0 && !done)
 		{
+			//change the text
+			EncouragementText();
+			
 			//turn on the pause
 			paused = true;
 			done = true;
 		}
-	
+		
 	}
 	
 	//function to move the enemy towards the player
 	void MoveToPlayer()
 	{
+		//if the enemy is moving towards the player
+		if(!done)
+		{
+			//#duh
+			transform.Translate (Vector3.up/100);
+		}
+		else
+		{
 			//#duh
 			transform.Translate (Vector3.up/40);
+		}
 	}
 	
 	//function to set the text above the enemy so player knows what the enemy wantz
 	void InitialText()
 	{
 		//variable for setting the string
-		string bbluvdoll = "I WANT COFFEE. ONE PART ESPRESSO, ONE PART MILK.";
+		string bbluvdoll = "Looks like your machines are broken. Use A, S, D, and F to repair them!";
 		//Set the text over the enemy to their drink desires
 		EnemyText.GetComponentInChildren<Text> ().text = bbluvdoll;
 		
@@ -76,7 +87,7 @@ public class EncounterEnemy : MonoBehaviour {
 	void EncouragementText()
 	{
 		//variable for setting the string
-		string bbluvdoll = "THIS ISN'T WHAT I ASKED FOR. ONE ESPRESSO. ONE MILK.";
+		string bbluvdoll = "I want one part espresso, one part milk, one part sugar, and one part vanilla.";
 		//Set the text over the enemy to their drink desires
 		EnemyText.GetComponentInChildren<Text> ().text = bbluvdoll;
 		
@@ -92,12 +103,12 @@ public class EncounterEnemy : MonoBehaviour {
 		StartCoroutine ("BoomDestroy");
 		//disable his trigger and rigidbody so nothing hits the enemy
 		GetComponent<BoxCollider2D> ().enabled = false;
-
+		
 		//Change the text of the enemy to done
 		EnemyText.GetComponentInChildren<Text> ().text = "Thanks a ton!";
 		
 		//exit stage right
-
+		
 		//Reset the rotation of the text again because it'll be flipped
 		EnemyText.transform.localRotation = Quaternion.Euler (0, 0, 90);
 		//rotate towards right
@@ -109,7 +120,7 @@ public class EncounterEnemy : MonoBehaviour {
 	public void CheckDrink(int e, int m, int s, int v)
 	{
 		//if all the ingredients of the drink coming in match those of the enemy,
-		if (e == 1 && m == 1 && s == 0 && v == 0) 
+		if (e == 1 && m == 1 && s == 1 && v == 1) 
 		{
 			//they're good and they can leave the store, with happy as true
 			LeaveTheStore();
@@ -126,18 +137,16 @@ public class EncounterEnemy : MonoBehaviour {
 	IEnumerator BoomDestroy()
 	{	
 		
-		//wait a few seconds
 		yield return new WaitForSeconds(10f);
 		
-		//turn off infinite resources
-		WaveManager.InfiniteResources = false;
-		
-		//break the machines
-		WaveManager.BreakMachines();
-		
-		//start the second encounter
-		EncounterEnemySecond.Unpause();
+		//start the first level
+		WaveManager.BeginTheGame();
 		
 		Destroy (this.gameObject);
+	}
+	
+	public void Unpause()
+	{
+		paused = false;
 	}
 }

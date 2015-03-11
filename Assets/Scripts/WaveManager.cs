@@ -31,15 +31,6 @@ public class WaveManager : MonoBehaviour {
 	
 	public Transform[] spawnLocations; //array of transforms, which are spawn locations inserted publicly
 	
-	// Use this for initialization
-	void Start () {
-	
-	
-		running = false;
-		canStart = false;
-		//StartWave (); //start wave
-	}
-	
 	// Update is called once per frame
 	void Update () {
 
@@ -71,12 +62,18 @@ public class WaveManager : MonoBehaviour {
 		
 	}
 	
+	//function to break all the machines
 	public static void BreakMachines()
 	{
 		myBreakAll();
 	}
 	
-	
+	//function to start the game
+	public static void BeginTheGame()
+	{
+		running = true;
+		canStart = true;
+	}
 	
 	void StartWave() //start wave set
 	{

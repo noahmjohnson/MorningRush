@@ -95,8 +95,12 @@ public class MilkStock : MonoBehaviour {
 		//wait a few seconds to spoil the next milk
 		yield return new WaitForSeconds(4f);
 		
-		//spoil the milk
-		CurrentFreshMilk--;
+		//if you have at least one milk,
+		if(CurrentFreshMilk > 0)
+		{
+			//spoil the milk
+			CurrentFreshMilk--;
+		}
 		
 		//flip the bool back off
 		waitSpoil = false;

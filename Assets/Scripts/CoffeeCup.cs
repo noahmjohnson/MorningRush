@@ -49,9 +49,17 @@ public class CoffeeCup : MonoBehaviour {
 		//if it hits an encounter enemy
 		else if (c.tag == "EncounterEnemy")
 		{
-			//logic to check if it satisfies enemy
-			c.GetComponent<EncounterEnemy>().CheckDrink(Espresso, Milk, Sugar, Vanilla);
-			
+			//if its the second encounter enemy
+			if(c.gameObject.name == "EncounterEnemy2")
+			{
+				//logic to check if it satisfies enemy
+				c.GetComponent<EncounterEnemy2>().CheckDrink(Espresso, Milk, Sugar, Vanilla);
+			}
+			else 
+			{
+				//logic to check if it satisfies enemy
+				c.GetComponent<EncounterEnemy>().CheckDrink(Espresso, Milk, Sugar, Vanilla);
+			}
 			//destroy the projectile because obviously
 			Destroy(this.gameObject);
 		}

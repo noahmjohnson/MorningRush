@@ -14,6 +14,9 @@ public class EnemyScript : MonoBehaviour {
 	public int Vanilla = 0;
 	//variable for actual part of the enemy that we will rotate, as opposed to the text
 	public GameObject EnemyText;
+	
+	//variable for if the enemy is already leaving
+	bool leaving = false;
 
 	//variable for if enemy is satisfied
 	bool satisfied = false;
@@ -70,39 +73,45 @@ public class EnemyScript : MonoBehaviour {
 	//function for when the enemy has been satisfied with their order
 	public void LeaveTheStore(bool happy)
 	{
-		//begin the coroutine for destroying this object
-		StartCoroutine ("BoomDestroy");
-		//disable his trigger and rigidbody so nothing hits the enemy
-		GetComponent<BoxCollider2D> ().enabled = false;
-		if (happy) 
+		//if they're already leaving, obviously dont worry yourself
+		if(leaving)
 		{
-			//Change the text of the enemy to "happy as a clam"
-			EnemyText.GetComponentInChildren<Text> ().text = "Thank you!";
+			//tell that hes leaving
+			leaving = true;
+
+			//begin the coroutine for destroying this object
+			StartCoroutine ("BoomDestroy");
+			//disable his trigger and rigidbody so nothing hits the enemy
+			GetComponent<BoxCollider2D> ().enabled = false;
+			if (happy) 
+			{
+				//Change the text of the enemy to "happy as a clam"
+				EnemyText.GetComponentInChildren<Text> ().text = "Thank you!";
+			}
+			else 
+			{
+				//Change the text of the enemy to "not happy"
+				EnemyText.GetComponentInChildren<Text> ().text = "CAN I SEE THE MANAGER";
+			}
+			//the customer is satisfied with their experience
+			satisfied = true;
+			//if this, exit stage right
+			if (Random.Range (0, 2) == 1) 
+			{
+				//Reset the rotation of the text again because it'll be flipped
+				EnemyText.transform.localRotation = Quaternion.Euler (0, 0, 90);
+				//rotate towards right
+				transform.rotation = Quaternion.Euler(0,0,-90);
+			}
+			//otherwise exit stage left
+			else 
+			{
+				//Reset the rotation of the text again because it'll be flipped
+				EnemyText.transform.localRotation = Quaternion.Euler (0, 0, -90);
+				//rotate towards left
+				transform.rotation = Quaternion.Euler(0,0,90);
+			}
 		}
-		else 
-		{
-			//Change the text of the enemy to "not happy"
-			EnemyText.GetComponentInChildren<Text> ().text = "CAN I SEE THE MANAGER";
-		}
-		//the customer is satisfied with their experience
-		satisfied = true;
-		//if this, exit stage right
-		if (Random.Range (0, 2) == 1) 
-		{
-			//Reset the rotation of the text again because it'll be flipped
-			EnemyText.transform.localRotation = Quaternion.Euler (0, 0, 90);
-			//rotate towards right
-			transform.rotation = Quaternion.Euler(0,0,-90);
-		}
-		//otherwise exit stage left
-		else 
-		{
-			//Reset the rotation of the text again because it'll be flipped
-			EnemyText.transform.localRotation = Quaternion.Euler (0, 0, -90);
-			//rotate towards left
-			transform.rotation = Quaternion.Euler(0,0,90);
-		}
-		
 	}
 
 	//function to set the random variables for what ingredients the enemy wants and how many of each
