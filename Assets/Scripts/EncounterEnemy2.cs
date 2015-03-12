@@ -77,7 +77,7 @@ public class EncounterEnemy2 : MonoBehaviour {
 	void InitialText()
 	{
 		//variable for setting the string
-		string bbluvdoll = "Looks like your machines are broken. Use A, S, D, and F to repair them!";
+		string bbluvdoll = "Looks like your machines are broken.\nUse A, S, and D to repair them!";
 		//Set the text over the enemy to their drink desires
 		EnemyText.GetComponentInChildren<Text> ().text = bbluvdoll;
 		

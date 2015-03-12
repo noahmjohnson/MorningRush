@@ -15,6 +15,16 @@ public class CoffeeCup : MonoBehaviour {
 		StartCoroutine("BoomDestroy");
 	
 	}
+	
+	IEnumerator WaitForParticles()
+	{
+		rigidbody2D.velocity = new Vector2(0,0);
+		GetComponent<SpriteRenderer>().enabled = false;
+		GetComponent<ParticleSystem>().Stop();
+		yield return new WaitForSeconds(3);
+		Destroy (this.gameObject);
+		
+	}
 
 	//coroutine for destorying a projectile if it flies off screen
 	IEnumerator BoomDestroy()
@@ -44,7 +54,7 @@ public class CoffeeCup : MonoBehaviour {
 			c.GetComponent<EnemyScript>().CheckDrink(Espresso, Milk, Sugar, Vanilla);
 
 			//destroy the projectile because obviously
-			Destroy(this.gameObject);
+			StartCoroutine("WaitForParticles");
 		}
 		//if it hits an encounter enemy
 		else if (c.tag == "EncounterEnemy")
@@ -61,7 +71,7 @@ public class CoffeeCup : MonoBehaviour {
 				c.GetComponent<EncounterEnemy>().CheckDrink(Espresso, Milk, Sugar, Vanilla);
 			}
 			//destroy the projectile because obviously
-			Destroy(this.gameObject);
+			StartCoroutine("WaitForParticles");
 		}
 
 	}

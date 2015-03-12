@@ -67,14 +67,14 @@ public class EnemyScript : MonoBehaviour {
 	void MoveToPlayer()
 	{
 		//#duh
-		transform.Translate (Vector3.up/40);
+		transform.Translate (Vector3.up/60);
 	}
 
 	//function for when the enemy has been satisfied with their order
 	public void LeaveTheStore(bool happy)
 	{
 		//if they're already leaving, obviously dont worry yourself
-		if(leaving)
+		if(!leaving)
 		{
 			//tell that hes leaving
 			leaving = true;
