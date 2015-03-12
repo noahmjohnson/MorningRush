@@ -8,10 +8,10 @@ public class PlayerScript : MonoBehaviour {
 	public static event MassExodus myMassExodus;
 
 	//variables for what the player has queued up
-	public int PEspresso = 0;
-	public int PMilk = 0;
-	public int PSugar = 0;
-	public int PVanilla = 0;
+	public static int PEspresso = 0;
+	public static int PMilk = 0;
+	public static int PSugar = 0;
+	public static int PVanilla = 0;
 	
 	//machines
 	public GameObject EspressoMachineObject;
@@ -19,7 +19,7 @@ public class PlayerScript : MonoBehaviour {
 	public GameObject SugarBagObject;
 	
 	//variable for checking if the player is currently busy doing something
-	public bool busy = false;
+	public static bool busy = false;
 	
 	//variable for affecting movement, making player slower/faster
 	public float speed = 5;

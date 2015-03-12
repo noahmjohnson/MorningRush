@@ -9,15 +9,13 @@ public class SugarBag : MonoBehaviour {
 	public int CurrentSugar;
 	//bool for if the player is pouring sugar currently
 	public bool PouringSugar = false;
-	//variabel for the player script
-	public PlayerScript myPlayerScript;
+
 	
 	// Use this for initialization
 	void Start () {
 		//subscribe to the breakall
 		WaveManager.myBreakAll += BreakMachine;
 	
-		myPlayerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>(); //set the player script
 		SetCurrentSugar(); //call the function to set the current maintenance
 	}
 	
@@ -63,7 +61,7 @@ public class SugarBag : MonoBehaviour {
 				CurrentSugar -= 100;
 			}
 			//add one to the queue
-			myPlayerScript.PSugar++;
+			PlayerScript.PSugar++;
 		}
 		//otherwise
 		else

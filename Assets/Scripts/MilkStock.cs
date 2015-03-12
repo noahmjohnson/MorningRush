@@ -8,9 +8,6 @@ public class MilkStock : MonoBehaviour {
 	//variable for the current amount of milk a player can use
 	public int CurrentFreshMilk;
 	
-	//variable for the player script
-	public PlayerScript myPlayerScript;
-	
 	//variable for allowing the milk to decay afer x seconds
 	private bool waitSpoil;
 	
@@ -19,8 +16,7 @@ public class MilkStock : MonoBehaviour {
 	void Start () {
 		//subscribe to the breakall
 		WaveManager.myBreakAll += BreakMachine;
-		
-		myPlayerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>(); //set the player script
+
 		SetCurrentMilkStock(); //call the function to set the current milk
 		StartCoroutine("SpoilMilk");
 	}
@@ -54,13 +50,13 @@ public class MilkStock : MonoBehaviour {
 	IEnumerator StockMilk()
 	{
 		//make sure the player is busy so they can't shoot
-		myPlayerScript.busy = true;
+		PlayerScript.busy = true;
 		//after a few seconds
 		yield return new WaitForSeconds(2f);
 		//stock a full fridge of fresh milk
 		CurrentFreshMilk = MaxFreshMilk;
 		//make sure the player is no longer busy
-		myPlayerScript.busy = false;
+		PlayerScript.busy = false;
 	}
 	
 	//function to run the queueing of milk into the current drink
@@ -76,7 +72,7 @@ public class MilkStock : MonoBehaviour {
 				CurrentFreshMilk -= 1;
 			}
 			//add one to the queue
-			myPlayerScript.PMilk++;
+			PlayerScript.PMilk++;
 		}
 		//otherwise
 		else
