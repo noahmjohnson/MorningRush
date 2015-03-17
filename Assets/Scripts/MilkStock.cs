@@ -6,7 +6,7 @@ public class MilkStock : MonoBehaviour {
 	//variabel for the max amount of milk a player has in stock
 	public int MaxFreshMilk = 15;
 	//variable for the current amount of milk a player can use
-	public int CurrentFreshMilk;
+	public static int CurrentFreshMilk;
 	
 	//variable for allowing the milk to decay afer x seconds
 	private bool waitSpoil;

@@ -6,7 +6,7 @@ public class EspressoMachine : MonoBehaviour {
 	//variabel for the max amount of maintenance
 	public int MaxMaintenance = 20;
 	//variable for the current amount maintenance
-	public int CurrentMaintenance;
+	public static int CurrentMaintenance;
 
 	// Use this for initialization
 	void Start () {

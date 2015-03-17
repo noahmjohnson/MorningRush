@@ -10,6 +10,12 @@ public class GUIScript : MonoBehaviour {
 	public Text MilkQueued;
 	public Text SugarQueued;
 	public Text VanillaQueued;
+	
+	//references to the bars of the equipment
+	public Slider EspressoSlider;
+	public Slider MilkSlider;
+	public Slider SugarSlider;
+	public Slider VanillaSlider;
 
 	// Use this for initialization
 	void Start () {
@@ -22,7 +28,20 @@ public class GUIScript : MonoBehaviour {
 		//update gui
 		UpdateComplaints();
 		UpdateQueue();
+		UpdateSliders();
 	
+	}
+	
+	void UpdateSliders()
+	{
+		EspressoSlider.value = EspressoMachine.CurrentMaintenance;
+		EspressoSlider.GetComponentInChildren<Text>().text = EspressoMachine.CurrentMaintenance.ToString();
+		
+		MilkSlider.value = MilkStock.CurrentFreshMilk;
+		MilkSlider.GetComponentInChildren<Text>().text = MilkStock.CurrentFreshMilk.ToString();
+		
+		SugarSlider.value = SugarBag.CurrentSugar;
+		SugarSlider.GetComponentInChildren<Text>().text = SugarBag.CurrentSugar.ToString();
 	}
 	
 	void UpdateQueue()

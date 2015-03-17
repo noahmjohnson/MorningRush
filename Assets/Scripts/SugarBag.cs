@@ -4,9 +4,9 @@ using System.Collections;
 public class SugarBag : MonoBehaviour {
 
 	//variable for max sugar
-	public int MaxSugar = 2000;
+	public int MaxSugar = 200;
 	//variable for the current amount of sugar
-	public int CurrentSugar;
+	public static int CurrentSugar;
 	//bool for if the player is pouring sugar currently
 	public bool PouringSugar = false;
 
@@ -57,14 +57,14 @@ public class SugarBag : MonoBehaviour {
 	void TryQueueSugar()
 	{
 		//if you have more than the required amount of sugar
-		if(CurrentSugar > 100)
+		if(CurrentSugar > 10)
 		{
 		
 			//if you dont have infinite
 			if(!WaveManager.InfiniteResources)
 			{
 				//remove 100 sugar
-				CurrentSugar -= 100;
+				CurrentSugar -= 10;
 			}
 			//add one to the queue
 			PlayerScript.PSugar++;
