@@ -16,6 +16,7 @@ public class MilkStock : MonoBehaviour {
 	void Start () {
 		//subscribe to the breakall
 		WaveManager.myBreakAll += BreakMachine;
+		WaveManager.myFixAll += FixMachine;
 
 		SetCurrentMilkStock(); //call the function to set the current milk
 		StartCoroutine("SpoilMilk");
@@ -25,6 +26,11 @@ public class MilkStock : MonoBehaviour {
 	void BreakMachine()
 	{
 		CurrentFreshMilk = 0;
+	}
+	
+	void FixMachine()
+	{
+		CurrentFreshMilk = MaxFreshMilk;
 	}
 	
 	//function to set the amount of current milk based off the max milk

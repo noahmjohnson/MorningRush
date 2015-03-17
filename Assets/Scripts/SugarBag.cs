@@ -15,6 +15,7 @@ public class SugarBag : MonoBehaviour {
 	void Start () {
 		//subscribe to the breakall
 		WaveManager.myBreakAll += BreakMachine;
+		WaveManager.myFixAll += FixMachine;
 	
 		SetCurrentSugar(); //call the function to set the current maintenance
 	}
@@ -30,6 +31,11 @@ public class SugarBag : MonoBehaviour {
 	void BreakMachine()
 	{
 		CurrentSugar = 0;
+	}
+	
+	void FixMachine()
+	{
+		CurrentSugar = MaxSugar;
 	}
 	
 	//update to check if youre pouring sugar

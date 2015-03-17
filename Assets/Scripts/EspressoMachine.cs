@@ -12,6 +12,7 @@ public class EspressoMachine : MonoBehaviour {
 	void Start () {
 		//subscribe to the breakall
 		WaveManager.myBreakAll += BreakMachine;
+		WaveManager.myFixAll += FixMachine;
 		
 		SetCurrentMaintenance(); //call the function to set the current maintenance
 	}
@@ -25,6 +26,11 @@ public class EspressoMachine : MonoBehaviour {
 	void BreakMachine()
 	{
 		CurrentMaintenance = 0;
+	}
+	
+	void FixMachine()
+	{
+		CurrentMaintenance = MaxMaintenance;
 	}
 	
 	//ienumerator for stocking fresh milk

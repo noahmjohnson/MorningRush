@@ -6,6 +6,10 @@ public class WaveManager : MonoBehaviour {
 	//event handler for breaking all machines
 	public delegate void BreakAllMachines();
 	public static event BreakAllMachines myBreakAll;
+	
+	//event handler for fixing all machines
+	public delegate void FixAllMachines();
+	public static event FixAllMachines myFixAll;
 
 	//variable for how many complaints the player can take
 	public static int PlayerHealth = 3;
@@ -66,6 +70,11 @@ public class WaveManager : MonoBehaviour {
 	public static void BreakMachines()
 	{
 		myBreakAll();
+	}
+	
+	public static void FixMachines()
+	{
+		myFixAll();
 	}
 	
 	//function to start the game

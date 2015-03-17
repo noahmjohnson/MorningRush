@@ -21,9 +21,6 @@ public class EnemyScript : MonoBehaviour {
 	//variable for if enemy is satisfied
 	bool satisfied = false;
 
-	//variable for speed of the enemy
-	public int speed = 3;
-
 	// Use this for initialization
 	void Start () {
 	
@@ -66,8 +63,16 @@ public class EnemyScript : MonoBehaviour {
 	//function to move the enemy towards the player
 	void MoveToPlayer()
 	{
-		//#duh
-		transform.Translate (Vector3.up/60);
+		if(leaving)
+		{
+			//#duh
+			transform.Translate (Vector3.up/20);
+		}	
+		else 
+		{
+			//#duh
+			transform.Translate (Vector3.up/60);
+		}
 	}
 
 	//function for when the enemy has been satisfied with their order

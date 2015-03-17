@@ -12,6 +12,9 @@ public class EncounterEnemy2 : MonoBehaviour {
 	public bool paused = false;
 	public bool done = false;
 	
+	//speed of enemy
+	int speed = 40;
+	
 	//variable for actual part of the enemy that we will rotate, as opposed to the text
 	public GameObject EnemyText;
 	
@@ -45,7 +48,7 @@ public class EncounterEnemy2 : MonoBehaviour {
 		}
 		
 		//if they hit y position 2,
-		if(transform.position.y < 0 && !done)
+		if(transform.position.y < -2.8f && !done)
 		{
 			//change the text
 			EncouragementText();
@@ -60,17 +63,8 @@ public class EncounterEnemy2 : MonoBehaviour {
 	//function to move the enemy towards the player
 	void MoveToPlayer()
 	{
-		//if the enemy is moving towards the player
-		if(!done)
-		{
-			//#duh
-			transform.Translate (Vector3.up/100);
-		}
-		else
-		{
-			//#duh
-			transform.Translate (Vector3.up/40);
-		}
+		//#duh
+		transform.Translate (Vector3.up/speed);
 	}
 	
 	//function to set the text above the enemy so player knows what the enemy wantz
@@ -98,6 +92,9 @@ public class EncounterEnemy2 : MonoBehaviour {
 	{
 		//unpause him
 		paused = false;
+		
+		//change speed
+		speed = 20;
 		
 		//begin the coroutine for destroying this object
 		StartCoroutine ("BoomDestroy");
@@ -138,6 +135,9 @@ public class EncounterEnemy2 : MonoBehaviour {
 	{	
 		
 		yield return new WaitForSeconds(10f);
+		
+		//reset the stocks
+		WaveManager.FixMachines();
 		
 		//start the first level
 		WaveManager.BeginTheGame();

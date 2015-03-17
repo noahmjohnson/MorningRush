@@ -13,6 +13,9 @@ public class EncounterEnemy : MonoBehaviour {
 	public bool paused;
 	public bool done;
 	
+	//speed
+	int speed = 40;
+	
 	//variable for actual part of the enemy that we will rotate, as opposed to the text
 	public GameObject EnemyText;
 
@@ -46,7 +49,7 @@ public class EncounterEnemy : MonoBehaviour {
 		}
 		
 		//if they hit y position 2,
-		if(transform.position.y < 2 && !done)
+		if(transform.position.y < -2.8f && !done)
 		{
 			//turn on the pause
 			paused = true;
@@ -59,7 +62,7 @@ public class EncounterEnemy : MonoBehaviour {
 	void MoveToPlayer()
 	{
 			//#duh
-			transform.Translate (Vector3.up/40);
+			transform.Translate (Vector3.up/speed);
 	}
 	
 	//function to set the text above the enemy so player knows what the enemy wantz
@@ -87,6 +90,9 @@ public class EncounterEnemy : MonoBehaviour {
 	{
 		//unpause him
 		paused = false;
+		
+		//faster
+		speed = 20;
 		
 		//begin the coroutine for destroying this object
 		StartCoroutine ("BoomDestroy");
