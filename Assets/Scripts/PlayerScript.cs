@@ -17,6 +17,7 @@ public class PlayerScript : MonoBehaviour {
 	public GameObject EspressoMachineObject;
 	public GameObject MilkStockObject;
 	public GameObject SugarBagObject;
+	public GameObject VanillaPumpObject;
 	
 	//variable for checking if the player is currently busy doing something
 	public static bool busy = false;
@@ -67,7 +68,7 @@ public class PlayerScript : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.R))
 		{
 			//add Vanilla
-			PVanilla++;
+			VanillaPumpObject.SendMessage("TryQueueVanilla");
 		}
 		if (Input.GetKeyDown (KeyCode.A))
 		{

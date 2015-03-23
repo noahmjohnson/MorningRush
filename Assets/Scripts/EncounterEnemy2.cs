@@ -10,7 +10,7 @@ public class EncounterEnemy2 : MonoBehaviour {
 	
 	//bools to pause the player
 	public bool paused = false;
-	public bool done = false;
+	public static bool done = false;
 	
 	//speed of enemy
 	int speed = 40;
