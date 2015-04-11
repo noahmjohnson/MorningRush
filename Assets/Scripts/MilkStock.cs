@@ -4,7 +4,7 @@ using System.Collections;
 public class MilkStock : MonoBehaviour {
 
 	//variabel for the max amount of milk a player has in stock
-	public int MaxFreshMilk = 20;
+	public int MaxFreshMilk = 15;
 	//variable for the current amount of milk a player can use
 	public static int CurrentFreshMilk;
 	
@@ -19,6 +19,7 @@ public class MilkStock : MonoBehaviour {
 		WaveManager.myFixAll += FixMachine;
 
 		SetCurrentMilkStock(); //call the function to set the current milk
+		StartCoroutine("SpoilMilk");
 	}
 	
 	//function to break the machine
@@ -43,7 +44,7 @@ public class MilkStock : MonoBehaviour {
 	void Update () {
 		
 		//if you dont need to wait,
-		if(!waitSpoil && EncounterEnemy2.done)
+		if(!waitSpoil)
 		{
 			//spoil the milk
 			StartCoroutine("SpoilMilk");
